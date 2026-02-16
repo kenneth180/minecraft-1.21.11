@@ -4,25 +4,106 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minecraft 1.21.11</title>
-    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #87CEEB;
+        }
+        /* Responsive Design */
+        #gameCanvas {
+            display: block;
+            margin: auto;
+            width: 100%;
+            height: 100vh;
+            background: #4B8C2B;
+        }
+        /* HUD styles */
+        #hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 24px;
+        }
+        /* Pause menu styles */
+        #pauseMenu {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            color: white;
+        }
+    </style>
 </head>
 <body>
-    <div id="splash-screen">
-        <h1>Mojang Studios</h1>
-        <h2>Minecraft 1.21.11</h2>
+    <div id="hud">Inventory: <span id="inventoryCount">0</span></div>
+    <div id="pauseMenu">
+        <h2>Paused</h2>
+        <button onclick="resumeGame()">Resume</button>
+        <button onclick="exitGame()">Exit</button>
     </div>
-    <div id="main-menu" style="display:none;">
-        <button id="singleplayer">Singleplayer</button>
-        <button id="multiplayer">Multiplayer</button>
-        <button id="credits">Credits</button>
-        <button id="quit">Quit</button>
-    </div>
-    <div id="world-generation" style="display:none;">
-        <h2>Generating World...</h2>
-    </div>
-    <div id="block-system" style="display:none;"></div>
-    <div id="inventory" style="display:none;"></div>
-    <div id="server-browser" style="display:none;"></div>
-    <script src="script.js"></script>
+    <canvas id="gameCanvas"></canvas>
+    <script>
+        // Basic Game Setup
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Game Variables
+        let isPaused = false;
+        let inventoryCount = 0;
+
+        // Responsive Canvas Size
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Game Loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            if (!isPaused) {
+                // Game Logic: Update terrain, player position, etc.
+                // Drawing Code
+            }
+            requestAnimationFrame(gameLoop);
+        }
+
+        // Pause Functionality
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'p') {
+                isPaused = !isPaused;
+                document.getElementById('pauseMenu').style.display = isPaused ? 'block' : 'none';
+            }
+        });
+
+        function resumeGame() {
+            isPaused = false;
+            document.getElementById('pauseMenu').style.display = 'none';
+        }
+
+        function exitGame() {
+            // Logic to exit game or go to main menu
+        }
+
+        // Day/Night Cycle
+        function updateDayNightCycle() {
+            // Logic for day/night cycle
+        }
+
+        // Inventory Management
+        function updateInventory(count) {
+            inventoryCount += count;
+            document.getElementById('inventoryCount').innerText = inventoryCount;
+        }
+
+        // Start Game Loop
+        gameLoop();
+    </script>
 </body>
 </html>
