@@ -1,1 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraft 1.21.11</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #e0e0e0; }
+        h1 { color: #44a; }
+        .game-container { width: 100%; height: 100vh; background-color: #444; overflow: hidden; position: relative; }
+        canvas { background: #fff; position: absolute; }
+    </style>
+</head>
+<body>
+    <h1>Minecraft 1.21.11</h1>
+    <div class="game-container">
+        <canvas id="gameCanvas"></canvas>
+    </div>
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
+        // Simple rendering loop
+        function gameLoop() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawGame();
+            requestAnimationFrame(gameLoop);
+        }
+
+        function drawGame() {
+            // Basic example of what might be drawn
+            ctx.fillStyle = 'green';
+            ctx.fillRect(50, 50, 100, 100); // Placeholder for a block
+        }
+
+        gameLoop();
+    </script>
+</body>
+</html>
